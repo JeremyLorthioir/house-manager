@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.house.housemanager.exceptions.NotFoundException;
 import com.house.housemanager.model.Task;
-import com.house.housemanager.repository.RecurrenceRepository;
 import com.house.housemanager.repository.TaskRepository;
 
 @RestController
@@ -32,10 +31,6 @@ public class TaskController {
 
     @PostMapping(path = "/tasks")
     public Task addNewtask(@RequestBody Task newTask) {
-        System.out.println(newTask);
-
-        // recurrence = recurrenceRepository.findById(newTask.getRecurrence());
-
         return taskRepository.save(newTask);
     }
 
