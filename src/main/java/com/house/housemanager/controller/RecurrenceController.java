@@ -10,33 +10,28 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.house.housemanager.exceptions.NotFoundException;
-import com.house.housemanager.model.Task;
+import com.house.housemanager.model.Recurrence;
 import com.house.housemanager.repository.RecurrenceRepository;
-import com.house.housemanager.repository.TaskRepository;
 
 @RestController
-public class TaskController {
+public class RecurrenceController {
     @Autowired
-    private TaskRepository taskRepository;
+    private RecurrenceRepository recurrenceRepository;
 
-    @GetMapping("/tasks")
-    public Iterable<Task> getAllTasks() {
-        return taskRepository.findAll();
+    @GetMapping("/recurrences")
+    public Iterable<Recurrence> getAllRecurrences() {
+        return recurrenceRepository.findAll();
     }
 
-    @GetMapping("/tasks/{id}")
-    public Task getTask(@PathVariable UUID id) {
-        return taskRepository.findById(id)
+    @GetMapping("/recurrences/{id}")
+    public Recurrence getRecurrence(@PathVariable UUID id) {
+        return recurrenceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(id));
     }
 
-    @PostMapping(path = "/tasks")
-    public Task addNewtask(@RequestBody Task newTask) {
-        System.out.println(newTask);
-
-        // recurrence = recurrenceRepository.findById(newTask.getRecurrence());
-
-        return taskRepository.save(newTask);
+    @PostMapping(path = "/recurrences")
+    public Recurrence addNewRecurrence(@RequestBody Recurrence newRecurrence) {
+        return recurrenceRepository.save(newRecurrence);
     }
 
 }

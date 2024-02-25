@@ -17,6 +17,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -32,6 +34,10 @@ public class Task {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskType type;
+
+    @ManyToOne    
+    @JoinColumn(name = "recurrence_id", nullable = false)
+    private Recurrence recurrence;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -63,6 +69,14 @@ public class Task {
 
     public void setType(TaskType type) {
         this.type = type;
+    }
+
+    public Recurrence getRecurrence() {
+        return this.recurrence;
+    }
+
+    public void setRecurrence(Recurrence recurrence) {
+        this.recurrence = recurrence;
     }
 
     public Date getCreatedAt() {

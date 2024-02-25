@@ -1,7 +1,5 @@
 package com.house.housemanager.exceptions;
 
-import java.util.UUID;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
