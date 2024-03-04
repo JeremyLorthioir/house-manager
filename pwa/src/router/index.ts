@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HouseManagerView from '../views/HouseManagerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,12 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HouseManagerView
+    },
+    {
+      path: '/house-manager',
+      name: 'House Manager',
+      component: HouseManagerView
     },
     {
       path: '/about',
