@@ -4,9 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.JoinFormula;
-import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.annotations.DialectOverride.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,8 +21,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -49,6 +44,7 @@ public class Task {
     private Recurrence recurrence;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<UserTask> userTasks;
 
     @CreatedDate

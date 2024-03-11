@@ -24,8 +24,13 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public Iterable<Task> getAllTasks() {
+        Iterable<Task> tasks = taskRepository.findAll();
+        for (Task task : tasks){
+            task.setLastUser(); 
+            task.getUserTasks().sort(null);
+        }
 
-        return taskRepository.findAll();
+        return tasks;
     }
 
     @GetMapping("/tasks/{id}")
