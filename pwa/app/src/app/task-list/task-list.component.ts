@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, inject } from '@angular/core';
-import {MatTableModule} from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
+import { Task } from '../interfaces/task.interface';
+import { TaskService } from '../services/taskService';
 
 @Component({
   selector: 'app-task-list',
@@ -11,13 +12,11 @@ import {MatTableModule} from '@angular/material/table';
   styleUrl: './task-list.component.scss'
 })
 export class TaskListComponent implements OnInit {
-  httpClient = inject(HttpClient);
-  tasks: any[] = [];
-  ngOnInit(): void {
-    this.fetchData();
-  }
+  tasks: Task[] = [];
 
-  fetchData() {
-    this.httpClient.get("http://localhost:8080/tasks").subscribe((data: any) => { console.log(data); this.tasks = data; })
+  constructor(private TaskService: TaskService) { }
+
+  ngOnInit(): void {
+    this.TaskService.getTasks().subscribe((tasks) => { this.tasks = tasks });
   }
 }
