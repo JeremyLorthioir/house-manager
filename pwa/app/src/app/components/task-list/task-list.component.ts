@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { Task } from '../interfaces/task.interface';
-import { TaskService } from '../services/taskService';
+import { Task } from '../../interfaces/task.interface';
+import { TaskService } from '../../services/taskService';
 
 @Component({
   selector: 'app-task-list',
