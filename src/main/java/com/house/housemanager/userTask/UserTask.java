@@ -1,4 +1,4 @@
-package com.house.housemanager.model;
+package com.house.housemanager.userTask;
 
 import java.util.Date;
 import java.util.UUID;
@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.springframework.data.annotation.CreatedDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.house.housemanager.task.Task;
+import com.house.housemanager.user.User;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

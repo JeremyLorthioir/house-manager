@@ -1,4 +1,4 @@
-package com.house.housemanager.controller;
+package com.house.housemanager.task;
 
 import java.util.UUID;
 
@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.house.housemanager.exceptions.NotFoundException;
-import com.house.housemanager.model.Task;
-import com.house.housemanager.repository.TaskRepository;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController

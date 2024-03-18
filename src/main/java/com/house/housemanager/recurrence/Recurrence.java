@@ -1,4 +1,4 @@
-package com.house.housemanager.model;
+package com.house.housemanager.recurrence;
 
 import com.house.housemanager.enums.Period;
 

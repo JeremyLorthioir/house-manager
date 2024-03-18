@@ -1,4 +1,4 @@
-package com.house.housemanager.model;
+package com.house.housemanager.task;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +10,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.house.housemanager.enums.TaskType;
+import com.house.housemanager.recurrence.Recurrence;
+import com.house.housemanager.userTask.UserTask;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -56,6 +58,7 @@ public class Task {
     private Date updatedAt = new Date();
 
     private String status;
+    private Date dueDate;
 
     public UUID getId() {
         return this.id;
@@ -105,19 +108,20 @@ public class Task {
         this.updatedAt = updatedAt;
     }
 
-    public String getStatus() {
-        return this.recurrence.getFrequency() == 1 ? "Oui" : "Non";
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public List<UserTask> getUserTasks() {
         return this.userTasks;
     }
 
     public void setUserTasks(List<UserTask> userTasks) {
         this.userTasks = userTasks;
+    }
+
+    public String getStatus() {
+        return this.recurrence.getFrequency() == 1 ? "Oui" : "Non";
+    }
+
+    public Date getDueDate() {
+
+        return new Date();
     }
 }

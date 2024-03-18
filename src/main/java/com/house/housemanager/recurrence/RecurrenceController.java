@@ -1,4 +1,4 @@
-package com.house.housemanager.controller;
+package com.house.housemanager.recurrence;
 
 import java.util.UUID;
 
@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.house.housemanager.exceptions.NotFoundException;
-import com.house.housemanager.model.Recurrence;
-import com.house.housemanager.repository.RecurrenceRepository;
 
 @RestController
 public class RecurrenceController {

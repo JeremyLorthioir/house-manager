@@ -1,9 +1,10 @@
-package com.house.housemanager.model;
+package com.house.housemanager.user;
 
 import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.house.housemanager.userTask.UserTask;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

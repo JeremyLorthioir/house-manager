@@ -1,12 +1,10 @@
-package com.house.housemanager.repository;
+package com.house.housemanager.user;
 
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.house.housemanager.model.UserTask;
-
 // This will be AUTO IMPLEMENTED by Spring into a Bean called TaskRepository
 // CRUD refers Create, Read, Update, Delete
-public interface UserTaskRepository extends CrudRepository<UserTask, UUID> {
+public interface UserRepository extends CrudRepository<User, UUID> {
 }
