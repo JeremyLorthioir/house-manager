@@ -3,11 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/taskService';
+import { DateComponent } from '../common/date.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [MatTableModule, CommonModule],
+  imports: [MatTableModule, CommonModule, DateComponent],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss'
 })

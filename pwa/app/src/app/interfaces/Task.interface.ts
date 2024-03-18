@@ -1,5 +1,5 @@
-import { Recurrence } from "./Recurrence.interface";
-import { UserTask } from "./UserTask.interface";
+import { Recurrence } from "./recurrence.interface";
+import { UserTask } from "./userTask.interface";
 
 export interface Task {
     id: string;
