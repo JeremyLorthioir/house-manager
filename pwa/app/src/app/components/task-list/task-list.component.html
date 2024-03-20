@@ -1,22 +1,24 @@
-<table mat-table [dataSource]="tasks" class="mat-elevation-z8">
-    <ng-container matColumnDef="libelle">
-        <th mat-header-cell *matHeaderCellDef> Libellé </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}}
-            <app-common-date [inputDate]="element.updatedAt"></app-common-date>
-        </td>
-    </ng-container>
-
-    <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> type </th>
-        <td mat-cell *matCellDef="let element"> {{element.type | titlecase }} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="recurrence">
-        <th mat-header-cell *matHeaderCellDef> Recurrence </th>
-        <td mat-cell *matCellDef="let element"> {{element.recurrence.description}} </td>
-    </ng-container>
-
-    <!-- Header and Row Declarations -->
-    <tr mat-header-row *matHeaderRowDef="['libelle', 'type', 'recurrence']"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['libelle', 'type', 'recurrence'];"></tr>
-</table>
+<div class="table-responsive-md">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Libellé</th>
+                <th scope="col">Type</th>
+                <th scope="col">Recurrence</th>
+                <th scope="col">Avant le</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks">
+                <th scope="row">{{task.name}}</th>
+                <td>{{task.type | titlecase }}</td>
+                <td>{{task.recurrence.description}}</td>
+                <td><app-common-date [inputDate]="task.dueDate"></app-common-date></td>
+                <td>
+                    <span class="badge rounded-pill" [ngClass]="mapStatusToClass(task.status)">{{task.status}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

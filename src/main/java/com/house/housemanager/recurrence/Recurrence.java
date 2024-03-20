@@ -70,4 +70,8 @@ public class Recurrence {
     public void setFrequency(Integer frequency) {
         this.frequency = frequency;
     }
+
+    public Integer getDaysBetweenFrequencies() {
+        return this.getPeriod().getDays() / this.getFrequency();
+    }
 }

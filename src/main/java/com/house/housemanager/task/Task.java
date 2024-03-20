@@ -1,5 +1,8 @@
 package com.house.housemanager.task;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -113,15 +116,25 @@ public class Task {
     }
 
     public void setUserTasks(List<UserTask> userTasks) {
+        userTasks.sort(Comparator.comparing(UserTask::getCreatedAt).reversed());
         this.userTasks = userTasks;
     }
 
     public String getStatus() {
-        return this.recurrence.getFrequency() == 1 ? "Oui" : "Non";
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        if(fmt.format(this.getDueDate()).equals(fmt.format(new Date()))){
+            return "pending";
+        }
+
+        return this.getDueDate().after(new Date()) ? "valid" : "expired";
     }
 
     public Date getDueDate() {
+        this.userTasks.sort(Comparator.comparing(UserTask::getCreatedAt).reversed());
+        Calendar c = Calendar.getInstance();
+        c.setTime(this.getUserTasks().getFirst().getCreatedAt());
+        c.add(Calendar.DATE, this.getRecurrence().getDaysBetweenFrequencies());
 
-        return new Date();
+        return c.getTime();
     }
 }

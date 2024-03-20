@@ -20,4 +20,15 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.TaskService.getTasks().subscribe((tasks) => { this.tasks = tasks });
   }
+
+  mapStatusToClass(status: String): string {
+    switch (status) {
+      case "expired":
+        return "bg-danger";
+      case "pending":
+        return "bg-warning";
+      default:
+        return "bg-success";
+    }
+  }
 }
