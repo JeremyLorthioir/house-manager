@@ -9,8 +9,7 @@ import { DateComponent } from '../common/date.component';
   selector: 'app-task-list',
   standalone: true,
   imports: [MatTableModule, CommonModule, DateComponent],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss'
+  templateUrl: './task-list.component.html'
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];

@@ -3,7 +3,7 @@ package com.house.housemanager.user;
 import java.util.List;
 import java.util.UUID;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.house.housemanager.userTask.UserTask;
 
 import jakarta.persistence.Column;
@@ -28,7 +28,7 @@ public class User {
     private String lastname;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnore
     private List<UserTask> userTasks;
 
     public UUID getId() {

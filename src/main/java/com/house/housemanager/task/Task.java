@@ -1,8 +1,5 @@
 package com.house.housemanager.task;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -11,7 +8,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.house.housemanager.enums.TaskType;
 import com.house.housemanager.recurrence.Recurrence;
 import com.house.housemanager.userTask.UserTask;
@@ -49,7 +46,7 @@ public class Task {
     private Recurrence recurrence;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnore
     private List<UserTask> userTasks;
 
     @CreatedDate
@@ -116,25 +113,22 @@ public class Task {
     }
 
     public void setUserTasks(List<UserTask> userTasks) {
-        userTasks.sort(Comparator.comparing(UserTask::getCreatedAt).reversed());
         this.userTasks = userTasks;
     }
 
     public String getStatus() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        if(fmt.format(this.getDueDate()).equals(fmt.format(new Date()))){
-            return "pending";
-        }
+        return this.status;
+    }
 
-        return this.getDueDate().after(new Date()) ? "valid" : "expired";
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Date getDueDate() {
-        this.userTasks.sort(Comparator.comparing(UserTask::getCreatedAt).reversed());
-        Calendar c = Calendar.getInstance();
-        c.setTime(this.getUserTasks().getFirst().getCreatedAt());
-        c.add(Calendar.DATE, this.getRecurrence().getDaysBetweenFrequencies());
+        return this.dueDate;
+    }
 
-        return c.getTime();
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 }

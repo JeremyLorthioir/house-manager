@@ -16,13 +16,14 @@ import com.house.housemanager.exceptions.NotFoundException;
 @RestController
 public class TaskController {
     @Autowired
+    private TaskService taskService;
+
+    @Autowired
     private TaskRepository taskRepository;
 
     @GetMapping("/tasks")
     public Iterable<Task> getAllTasks() {
-        Iterable<Task> tasks = taskRepository.findAll();
-
-        return tasks;
+        return taskService.getAllTasks();
     }
 
     @GetMapping("/tasks/{id}")
