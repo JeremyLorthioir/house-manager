@@ -28,8 +28,7 @@ public class TaskController {
 
     @GetMapping("/tasks/{id}")
     public Task getTask(@PathVariable UUID id) {
-        return taskRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id));
+        return taskService.getTaskById(id);
     }
 
     @PostMapping(path = "/tasks")

@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.house.housemanager.exceptions.NotFoundException;
-
 @RestController
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/users")
     public Iterable<User> getAllUsers() {
@@ -24,8 +25,7 @@ public class UserController {
 
     @GetMapping("/users/{id}")
     public User getUser(@PathVariable UUID id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id));
+        return userService.getUserById(id);
     }
 
     @PostMapping(path = "/users")
