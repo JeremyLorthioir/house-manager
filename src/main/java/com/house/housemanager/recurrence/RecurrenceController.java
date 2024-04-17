@@ -3,28 +3,30 @@ package com.house.housemanager.recurrence;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.house.housemanager.exceptions.NotFoundException;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 public class RecurrenceController {
     @Autowired
     private RecurrenceRepository recurrenceRepository;
 
+    @Autowired
+    private RecurrenceService recurrenceService;
+
     @GetMapping("/recurrences")
     public Iterable<Recurrence> getAllRecurrences() {
-        return recurrenceRepository.findAll();
+        return recurrenceService.getAllRecurrences();
     }
 
     @GetMapping("/recurrences/{id}")
     public Recurrence getRecurrence(@PathVariable UUID id) {
-        return recurrenceRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(id));
+        return recurrenceService.getRecurrenceById(id);
     }
 
     @PostMapping(path = "/recurrences")
