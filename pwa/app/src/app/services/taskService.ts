@@ -18,4 +18,8 @@ export class TaskService {
     createTask(task: any): Observable<Task> {
         return this.http.post<Task>(`${this.apiUrl}/tasks`, task, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
+
+    getTaskTypes(): Observable<string[]> {
+        return this.http.get<string[]>(`${this.apiUrl}/task_types`);
+    }
 }
