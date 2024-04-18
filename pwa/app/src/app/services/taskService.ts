@@ -22,4 +22,9 @@ export class TaskService {
     getTaskTypes(): Observable<string[]> {
         return this.http.get<string[]>(`${this.apiUrl}/task_types`);
     }
+
+    validateTask(taskId: string, userId: string) {
+        var data = { taskId: taskId, userId: userId };
+        return this.http.post<string[]>(`${this.apiUrl}/user_tasks`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    }
 }

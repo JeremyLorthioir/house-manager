@@ -7,6 +7,7 @@
                 <th scope="col">Recurrence</th>
                 <th scope="col">Avant le</th>
                 <th scope="col">Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,7 @@
                 <td>
                     <span class="badge rounded-pill" [ngClass]="mapStatusToClass(task.status)">{{task.status}}</span>
                 </td>
+                <td><button (click)="validateTask(task)" class="btn btn-outline-success">Valider</button></td>
             </tr>
         </tbody>
     </table>

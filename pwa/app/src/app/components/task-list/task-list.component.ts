@@ -17,6 +17,10 @@ export class TaskListComponent implements OnInit {
   constructor(private TaskService: TaskService) { }
 
   ngOnInit(): void {
+    this.initTasks();
+  }
+
+  initTasks(): void {
     this.TaskService.getTasks().subscribe((tasks) => { this.tasks = tasks });
   }
 
@@ -29,5 +33,18 @@ export class TaskListComponent implements OnInit {
       default:
         return "bg-success";
     }
+  }
+
+  validateTask(task: Task) {
+    var userId: string = "ecb3d479-42ce-42cd-9e1b-cd5f7f94fcf2";
+    this.TaskService.validateTask(task.id, userId).subscribe({
+      next: () => {
+        this.initTasks();
+      },
+      error: (error) => {
+        console.log(error);
+        alert("Impossible de valider la tâche.");
+      }
+    });
   }
 }
