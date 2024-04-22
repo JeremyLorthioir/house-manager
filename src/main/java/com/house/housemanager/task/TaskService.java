@@ -39,7 +39,7 @@ public class TaskService {
     }
 
     public Iterable<Task> getAllTasks() {
-        Iterable<Task> tasks = taskRepository.findAll();
+        Iterable<Task> tasks = taskRepository.findByArchived(false);
         for (Task task : tasks) {
             task.setStatus(this.getStatus(task));
             task.setDueDate(this.getDueDate(task));
@@ -51,5 +51,9 @@ public class TaskService {
     public Task getTaskById(UUID taskId) {
         return taskRepository.findById(taskId)
                 .orElseThrow(() -> new IllegalArgumentException("Task not found"));
+    }
+
+    public void deleteTask(UUID taskId) {
+        taskRepository.deleteById(taskId);
     }
 }

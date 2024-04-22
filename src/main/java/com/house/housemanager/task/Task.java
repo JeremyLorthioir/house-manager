@@ -37,6 +37,9 @@ public class Task {
     @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
+    private Boolean archived = false;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TaskType type;
@@ -74,6 +77,18 @@ public class Task {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Boolean isArchived() {
+        return this.archived;
+    }
+
+    public Boolean getArchived() {
+        return this.archived;
+    }
+
+    public void setArchived(Boolean archived) {
+        this.archived = archived;
     }
 
     public TaskType getType() {

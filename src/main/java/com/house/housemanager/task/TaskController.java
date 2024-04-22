@@ -3,7 +3,7 @@ package com.house.housemanager.task;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +17,6 @@ import com.house.housemanager.recurrence.RecurrenceService;
 import com.house.housemanager.user.User;
 import com.house.housemanager.userTask.UserTask;
 
-@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 public class TaskController {
     @Autowired
@@ -41,11 +40,19 @@ public class TaskController {
     @PostMapping(path = "/tasks")
     public Task addNewtask(@RequestBody TaskDTO newTaskDTO) {
         Recurrence recurrence = recurrenceService.getRecurrenceById(newTaskDTO.getRecurrenceId());
-        
+
         Task newTask = new Task();
         newTask.setName(newTaskDTO.getName());
         newTask.setType(TaskType.valueOf(newTaskDTO.getType()));
         newTask.setRecurrence(recurrence);
         return taskRepository.save(newTask);
+    }
+
+    @DeleteMapping("/tasks/{id}")
+    public Task archiveTask(@PathVariable UUID id) {
+        Task task = taskService.getTaskById(id);
+        task.setArchived(true);
+
+        return taskRepository.save(task);
     }
 }
