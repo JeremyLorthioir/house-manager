@@ -27,4 +27,8 @@ export class TaskService {
         var data = { taskId: taskId, userId: userId };
         return this.http.post<string[]>(`${this.apiUrl}/user_tasks`, data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
     }
+
+    deleteTask(taskId: string): any {
+        return this.http.delete(`${this.apiUrl}/tasks/${taskId}`);
+    }
 }

@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { TaskService } from '../../services/taskService';
-import { Task } from '../../interfaces/task.interface';
 import { RecurrenceService } from '../../services/recurrenceService';
 import { Recurrence } from '../../interfaces/recurrence.interface';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import * as bootstrap from 'bootstrap';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task-create',
@@ -13,10 +13,11 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './task-create.component.html'
 })
-export class TaskCreateComponent {
+export class TaskCreateComponent implements OnInit, OnDestroy {
   taskForm: FormGroup;
   taskTypes: string[] = [];
   recurrences: Recurrence[] = [];
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private formBuilder: FormBuilder, private taskService: TaskService, private recurrenceService: RecurrenceService) { }
 
@@ -35,25 +36,31 @@ export class TaskCreateComponent {
   }
 
   onSubmit() {
-    console.log(this.taskForm.value);
     if (this.taskForm.valid) {
-      this.taskService.createTask(this.taskForm.value).subscribe({
-        next: () => {
-          console.log("Ca marche")
-        },
+      const subscription = this.taskService.createTask(this.taskForm.value).subscribe({
         error: (error) => {
           console.log(error);
           alert("Impossible de créer la tâche.");
         }
       });
+
+      const modalInstance = bootstrap.Modal.getInstance(document.getElementById("taskFormModal")!);
+      modalInstance?.hide();
+      this.subscriptions.add(subscription);
     }
   }
 
   getTaskTypes(): void {
-    this.taskService.getTaskTypes().subscribe(types => this.taskTypes = types);
+    const subscription = this.taskService.getTaskTypes().subscribe(types => this.taskTypes = types);
+    this.subscriptions.add(subscription);
   }
 
   getAllRecurrences(): void {
-    this.recurrenceService.getRecurrences().subscribe(recurrences => this.recurrences = recurrences);
+    const subscription = this.recurrenceService.getRecurrences().subscribe(recurrences => this.recurrences = recurrences);
+    this.subscriptions.add(subscription);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

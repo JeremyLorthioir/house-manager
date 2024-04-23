@@ -1,26 +1,47 @@
-<div class="table-responsive-md">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Libellé</th>
-                <th scope="col">Type</th>
-                <th scope="col">Recurrence</th>
-                <th scope="col">Avant le</th>
-                <th scope="col">Status</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let task of tasks">
-                <th scope="row">{{task.name}}</th>
-                <td>{{task.type | titlecase }}</td>
-                <td>{{task.recurrence.description}}</td>
-                <td><app-common-date [inputDate]="task.dueDate"></app-common-date></td>
-                <td>
-                    <span class="badge rounded-pill" [ngClass]="mapStatusToClass(task.status)">{{task.status}}</span>
-                </td>
-                <td><button (click)="validateTask(task)" class="btn btn-outline-success">Valider</button></td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container">
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#taskFormModal">
+        <i class="bi bi-plus"></i> Créer une nouvelle tâche
+    </button>
+
+    <div class="table-responsive-md">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Libellé</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Recurrence</th>
+                    <th scope="col">Avant le</th>
+                    <th scope="col">Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of tasks">
+                    <th scope="row">{{task.name}}</th>
+                    <td>{{task.type | titlecase }}</td>
+                    <td>{{task.recurrence.description}}</td>
+                    <td><app-common-date [inputDate]="task.dueDate"></app-common-date></td>
+                    <td>
+                        <span class="badge rounded-pill"
+                            [ngClass]="mapStatusToClass(task.status)">{{task.status}}</span>
+
+                    </td>
+                    <td class="border-end"><button (click)="validateTask(task)" class="btn btn-outline-success">
+                            Valider <i class="bi bi-check-lg"></i></button>
+                    </td>
+                    <td class="d-flex flex-column">
+                        <span (click)="deleteTask(task)" class="text-warning">
+                            <i class="bi bi-pencil-fill"></i>
+                        </span>
+                        <span (click)="deleteTask(task)" class="text-danger">
+                            <i class="bi bi-trash-fill"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <app-task-create></app-task-create>
 </div>

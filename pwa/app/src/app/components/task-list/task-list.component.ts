@@ -4,11 +4,12 @@ import { MatTableModule } from '@angular/material/table';
 import { Task } from '../../interfaces/task.interface';
 import { TaskService } from '../../services/taskService';
 import { DateComponent } from '../common/date.component';
+import { TaskCreateComponent } from '../task-create/task-create.component';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [MatTableModule, CommonModule, DateComponent],
+  imports: [MatTableModule, CommonModule, DateComponent, TaskCreateComponent],
   templateUrl: './task-list.component.html'
 })
 export class TaskListComponent implements OnInit {
@@ -44,6 +45,17 @@ export class TaskListComponent implements OnInit {
       error: (error) => {
         console.log(error);
         alert("Impossible de valider la tâche.");
+      }
+    });
+  }
+
+  deleteTask(task: Task) {
+    this.TaskService.deleteTask(task.id).subscribe({
+      next: () => {
+        this.initTasks();
+      },
+      error: () => {
+        alert("Impossible de supprimer la tâche.");
       }
     });
   }

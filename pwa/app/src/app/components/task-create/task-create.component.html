@@ -1,35 +1,47 @@
-<div class="container">
-    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-        <div class="form-group">
-            <div class="form-group">
-                <label for="name">Nom :</label>
-                <input type="text" id="name" class="form-control" formControlName="name">
-                <div *ngIf="taskForm.get('name')?.errors?.['required'] && taskForm.get('name')?.touched"
-                    class="invalid-feedback">
-                    Le nom est requis.
-                </div>
+<div class="modal fade" id="taskFormModal" tabindex="-1" role="dialog" aria-labelledby="taskFormModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="taskModalLabel">Créer une nouvelle tâche</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="name">Nom :</label>
+                            <input type="text" id="name" class="form-control" formControlName="name">
+                            <div *ngIf="taskForm.get('name')?.errors?.['required'] && taskForm.get('name')?.touched"
+                                class="invalid-feedback">
+                                Le nom est requis.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type de tâche</label>
+                        <select class="form-control" id="type" formControlName="type">
+                            <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
+                        </select>
+                        <div *ngIf="taskForm.get('type')?.invalid && taskForm.get('type')?.touched" class="text-danger">
+                            Le type de tâche est requis.
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Recurrence de la tâche</label>
+                        <select class="form-control" id="recurrenceId" formControlName="recurrenceId">
+                            <option *ngFor="let recurrence of recurrences" [value]="recurrence.id">{{
+                                recurrence.description }}
+                            </option>
+                        </select>
+                        <div *ngIf="taskForm.get('recurrenceId')?.invalid && taskForm.get('recurrenceId')?.touched"
+                            class="text-danger">
+                            La recurrence de la tâche est requise.
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="!taskForm.valid" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
-        <div class="form-group">
-            <label for="type">Type de tâche</label>
-            <select class="form-control" id="type" formControlName="type">
-                <option *ngFor="let type of taskTypes" [value]="type">{{ type }}</option>
-            </select>
-            <div *ngIf="taskForm.get('type')?.invalid && taskForm.get('type')?.touched" class="text-danger">
-                Le type de tâche est requis.
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="type">Recurrence de la tâche</label>
-            <select class="form-control" id="recurrenceId" formControlName="recurrenceId">
-                <option *ngFor="let recurrence of recurrences" [value]="recurrence.id">{{ recurrence.description }}
-                </option>
-            </select>
-            <div *ngIf="taskForm.get('recurrenceId')?.invalid && taskForm.get('recurrenceId')?.touched"
-                class="text-danger">
-                La recurrence de la tâche est requise.
-            </div>
-        </div>
-        <button type="submit" [disabled]="!taskForm.valid" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
 </div>

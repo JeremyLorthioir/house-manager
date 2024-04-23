@@ -45,6 +45,7 @@ public class TaskController {
         newTask.setName(newTaskDTO.getName());
         newTask.setType(TaskType.valueOf(newTaskDTO.getType()));
         newTask.setRecurrence(recurrence);
+        newTask.setArchived(false);
         return taskRepository.save(newTask);
     }
 
