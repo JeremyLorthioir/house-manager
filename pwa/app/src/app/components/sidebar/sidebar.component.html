@@ -12,14 +12,22 @@
     </div>
     <nav class="sidebar-menu pt-3 pb-3">
         <div class="menu-header mt-3 mb-2">
-            Général
+            Géréral
+        </div>
+        <ul class="menu-items">
+            <li class="header-menu"><a routerLink="/" routerLinkActive="active"
+                    ariaCurrentWhenActive="page"><span>Home</span></a>
+            </li>
+            <li class="header-menu"><a routerLink="/statistiques" routerLinkActive="active"
+                    ariaCurrentWhenActive="page"><span>Statistiques</span></a>
+            </li>
+        </ul>
+        <div class="menu-header mt-3 mb-2">
+            Administration
         </div>
         <ul class="menu-items">
             <li class="header-menu"><a routerLink="/task-list" routerLinkActive="active"
                     ariaCurrentWhenActive="page"><span>Tâches</span></a>
-            </li>
-            <li class="header-menu"><a routerLink="/task-create" routerLinkActive="active"
-                    ariaCurrentWhenActive="page"><span>Créer tâche</span></a>
             </li>
         </ul>
     </nav>

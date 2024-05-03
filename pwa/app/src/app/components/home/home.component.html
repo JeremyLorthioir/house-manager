@@ -1,0 +1,41 @@
+<div class="container row">
+    <div class="col-sm-4">
+        <div class="list-group list-group-flush">
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                (click)="initTasks()">
+                Toutes
+            </a>
+            <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                *ngFor="let type of taskTypes" (click)="filterTasksByType(type)">
+                {{type}}
+                <div class="d-flex flex-row justify-content-evenly">
+                    <span class="badge bg-danger rounded-pill me-1">{{getTasksByTypeStatus(type,
+                        "invalid").length}}</span>
+                    <span class="badge bg-warning rounded-pill me-1">{{getTasksByTypeStatus(type,
+                        "pending").length}}</span>
+                    <span class="badge bg-success rounded-pill">{{getTasksByTypeStatus(type, "valid").length}}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div class="row">
+            <div class="col-sm-4" *ngFor="let task of filteredTasks">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{task.name}}</h3>
+                        <h4 class="card-subtitle mb-2 text-muted">{{task.type | titlecase }}</h4>
+                        <p class="card-text">À faire avant le :<app-common-date
+                                [inputDate]="task.dueDate"></app-common-date></p>
+                        <button (click)="validateTask(task)" class="btn btn-outline-success">
+                            Valider <i class="bi bi-check-lg"></i>
+                        </button>
+                    </div>
+                    <div class="card-footer">
+                        {{task.recurrence.description}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
