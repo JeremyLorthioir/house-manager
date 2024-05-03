@@ -30,11 +30,11 @@ export class HomeComponent {
     this.TaskService.getTaskTypes().subscribe((types) => { this.taskTypes = types });
   }
 
-  getTasksByTypeStatus(taskType: String, status: String): Task[] {
+  getTasksByTypeStatus(taskType: string, status: string): Task[] {
     return this.tasks.filter((task) => task.type === taskType && task.status === status);
   }
 
-  filterTasksByType(taskType: String): void {
+  filterTasksByType(taskType: string): void {
     this.filteredTasks = this.tasks.filter((task) => task.type === taskType);
   }
 
@@ -49,5 +49,27 @@ export class HomeComponent {
         alert("Impossible de valider la tâche.");
       }
     });
+  }
+
+  mapStatusToBorder(status: string): string {
+    switch (status) {
+      case "expired":
+        return "border-danger";
+      case "pending":
+        return "border-warning";
+      default:
+        return "border-success";
+    }
+  }
+
+  mapStatusToBackground(status: string): string {
+    switch (status) {
+      case "expired":
+        return "bg-danger";
+      case "pending":
+        return "bg-warning";
+      default:
+        return "bg-success";
+    }
   }
 }

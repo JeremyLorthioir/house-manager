@@ -21,9 +21,11 @@
     <div class="col-sm-8">
         <div class="row">
             <div class="col-sm-4" *ngFor="let task of filteredTasks">
-                <div class="card">
+                <div class="card" [ngClass]="mapStatusToBorder(task.status)">
+                    <div class="card-header" [ngClass]="mapStatusToBackground(task.status)">
+                        <h3 class="card-title mb-1">{{task.name}}</h3>
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title">{{task.name}}</h3>
                         <h4 class="card-subtitle mb-2 text-muted">{{task.type | titlecase }}</h4>
                         <p class="card-text">À faire avant le :<app-common-date
                                 [inputDate]="task.dueDate"></app-common-date></p>
