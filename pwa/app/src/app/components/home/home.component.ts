@@ -13,7 +13,7 @@ import { DateComponent } from '../common/date.component';
 export class HomeComponent {
   tasks: Task[] = [];
   filteredTasks: Task[] = [];
-  taskTypes: String[] = [];
+  taskTypes: string[] = [];
 
   constructor(private TaskService: TaskService) { }
 

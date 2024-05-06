@@ -9,10 +9,8 @@
                 *ngFor="let type of taskTypes" (click)="filterTasksByType(type)">
                 {{type}}
                 <div class="d-flex flex-row justify-content-evenly">
-                    <span class="badge bg-danger rounded-pill me-1">{{getTasksByTypeStatus(type,
-                        "invalid").length}}</span>
-                    <span class="badge bg-warning rounded-pill me-1">{{getTasksByTypeStatus(type,
-                        "pending").length}}</span>
+                    <span class="badge bg-danger rounded-pill me-1">{{getTasksByTypeStatus(type, "expired").length}}</span>
+                    <span class="badge bg-warning rounded-pill me-1">{{getTasksByTypeStatus(type, "pending").length}}</span>
                     <span class="badge bg-success rounded-pill">{{getTasksByTypeStatus(type, "valid").length}}</span>
                 </div>
             </a>
