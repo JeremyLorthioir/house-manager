@@ -21,8 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.house.housemanager.enums.Period;
 import com.house.housemanager.recurrence.Recurrence;
 import com.house.housemanager.recurrence.RecurrenceRepository;
-import com.house.housemanager.user.User;
-import com.house.housemanager.user.UserRepository;
 
 @SpringBootTest
 @AutoConfigureMockMvc
